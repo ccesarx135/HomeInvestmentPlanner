@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Real Estate Investment Planner</title>
+    <meta name="description" content="Plan sequential or overlapping property purchases. Pay off House #1, rent it, and roll net rent into House #2, #3, ..." />
+    <meta name="robots" content="index,follow" />
+
+    <!-- Canonical -->
+    <link rel="canonical" href="https://example.com/" />
+
+    <!-- Icons -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Real Estate Investment Planner" />
+    <meta property="og:description" content="Pay off, rent, and roll net rent into your next property in a chain." />
+    <meta property="og:url" content="https://example.com/" />
+    <meta property="og:image" content="https://example.com/og-image.png" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Real Estate Investment Planner" />
+    <meta name="twitter:description" content="Pay off, rent, and roll net rent into your next property in a chain." />
+    <meta name="twitter:image" content="https://example.com/og-image.png" />
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "Real Estate Investment Planner",
+      "url": "https://example.com/",
+      "description": "Pay off, rent, and roll net rent into your next property in a chain."
+    }
+    </script>
+
+    <link rel="stylesheet" href="./assets/styles.css" />
+    <script src="./assets/app.js" defer></script>
+  </head>
+  <body>
+    <header>
+      <div class="container">
+        <h1>Real Estate Investment Planner</h1>
+        <div class="actions">
+          <button id="resetBtn" class="btn">Reset</button>
+          <button id="addHouseBtn" class="btn primary">+ Add House</button>
+        </div>
+      </div>
+    </header>
+
+    <main class="container">
+      <section class="card" aria-labelledby="intro">
+        <h2 id="intro" class="section-title">Chain purchases with rent roll-over</h2>
+        <p class="subtle">Choose <em>sequential</em> (next home starts after prior payoff) or <em>overlap</em> (start earlier; rent contributes only after payoff).</p>
+      </section>
+
+      <!-- Global inputs -->
+      <section class="card" aria-labelledby="global">
+        <h3 id="global" class="section-title">Your Profile</h3>
+        <div class="row">
+          <label>
+            <div class="lab">Yearly Income</div>
+            <div class="input"><span>$</span><input id="yearlyIncome" type="number" inputmode="decimal" step="1000" value="120000"></div>
+          </label>
+          <label style="align-self:end;">
+            <div class="lab">Allow overlapping purchases</div>
+            <div class="input" style="padding:6px 10px;">
+              <input id="allowOverlap" type="checkbox" />
+            </div>
+          </label>
+          <label>
+            <div class="lab">Overlap lead (months before prior payoff)</div>
+            <div class="input"><input id="leadMonths" type="number" step="1" value="6" disabled></div>
+          </label>
+        </div>
+        <p class="subtle">When overlap is enabled, the next property starts <em>lead</em> months before the previous payoff. Net rent from a property is only applied to later mortgages <strong>after</strong> it’s paid off.</p>
+      </section>
+
+      <!-- Dynamic houses -->
+      <div id="houses" class="grid cols-3" style="margin-top: 16px;"></div>
+
+      <!-- Combined Summary -->
+      <section class="card" style="margin-top: 16px;" aria-labelledby="summary">
+        <h3 id="summary" class="section-title">Portfolio Timeline</h3>
+        <div class="stats">
+          <div class="stat">
+            <div class="name">Total Months (All Houses)</div>
+            <div id="totalTimeline" class="value">0y 0m</div>
+            <div id="timelineSub" class="subtle"></div>
+          </div>
+          <div class="stat">
+            <div class="name">Cumulative Net Rent (applied to next)</div>
+            <div id="cumNetRent" class="value">$0</div>
+            <div class="subtle">Sum of net rent from all paid-off houses.</div>
+          </div>
+        </div>
+      </section>
+
+      <footer>
+        Educational estimates only; not financial advice. Rates, taxes, and expenses vary by market.
+      </footer>
+    </main>
+  </body>
+</html>
